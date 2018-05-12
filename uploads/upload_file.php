@@ -1,6 +1,5 @@
 <?php
 
-
 if ($_FILES["file"]["error"] > 0) {
     echo "错误：: " . $_FILES["file"]["error"] . "<br>";
 } else {
