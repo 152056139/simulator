@@ -24,4 +24,4 @@ ___
 * height
 * weight
 
-## license
+## licen
