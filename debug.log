@@ -1,0 +1,29 @@
+[38640:14120:0514/183519.452:VERBOSE1:crash_service_main.cc(78)] Session start. cmdline is [--reporter-url=https://crashreporter.atom.io --application-name=Atom "--crashes-directory=C:\Users\joke\AppData\Local\Temp\Atom Crashes" --v=1]
+[38640:14120:0514/183519.458:VERBOSE1:crash_service.cc(142)] window handle is 0000000000100C50
+[38640:14120:0514/183519.459:VERBOSE1:crash_service.cc(284)] pipe name is \\.\pipe\Atom Crash Service
+dumps at C:\Users\joke\AppData\Local\Temp\Atom Crashes
+[38640:14120:0514/183519.459:VERBOSE1:crash_service.cc(288)] checkpoint is C:\Users\joke\AppData\Local\Temp\Atom Crashes\crash_checkpoint.txt
+server is https://crashreporter.atom.io
+maximum 128 reports/day
+reporter is electron-crash-service
+[38640:14120:0514/183519.460:VERBOSE1:crash_service_main.cc(94)] Ready to process crash requests
+[38640:18968:0514/183519.460:VERBOSE1:crash_service.cc(317)] client start. pid = 16348
+[38640:18968:0514/183521.921:VERBOSE1:crash_service.cc(317)] client start. pid = 5608
+[10028:2868:0514/183521.957:VERBOSE1:crash_service_main.cc(78)] Session start. cmdline is [--reporter-url=https://crashreporter.atom.io --application-name=Atom "--crashes-directory=C:\Users\joke\AppData\Local\Temp\Atom Crashes" --v=1]
+[10028:2868:0514/183521.962:VERBOSE1:crash_service.cc(142)] window handle is 0000000000080C72
+[10028:2868:0514/183521.962:VERBOSE1:crash_service.cc(284)] pipe name is \\.\pipe\Atom Crash Service
+dumps at C:\Users\joke\AppData\Local\Temp\Atom Crashes
+[10028:2868:0514/183521.962:VERBOSE1:crash_service.cc(288)] checkpoint is C:\Users\joke\AppData\Local\Temp\Atom Crashes\crash_checkpoint.txt
+server is https://crashreporter.atom.io
+maximum 128 reports/day
+reporter is electron-crash-service
+[10028:2868:0514/183521.962:ERROR:crash_service.cc(295)] could not start dumper
+[38640:35952:0514/183540.481:VERBOSE1:crash_service.cc(325)] client end. pid = 5608
+[38640:35952:0514/183542.474:VERBOSE1:crash_service.cc(325)] client end. pid = 16348
+[38640:35952:0514/183543.474:VERBOSE1:crash_service.cc(346)] zero clients. exiting
+[38640:14120:0514/183543.474:VERBOSE1:crash_service.cc(486)] session ending..
+[38640:14120:0514/183543.474:VERBOSE1:crash_service.cc(491)] clients connected :2
+clients terminated :2
+dumps serviced :0
+dumps reported :0
+[38640:14120:0514/183543.474:VERBOSE1:crash_service_main.cc(99)] Session end. return code is 0
