@@ -47,6 +47,7 @@ while (true) {
 
         
         $msg = json_encode($data) . PHP_EOL;
+        //Tools::log("DATA", $msg);
         print_r($msg);
 
         echo "发送socket\n";
