@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back">
+     <RelativeLayout
+         android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center" >
+
+       <TextView
+           android:id="@+id/textDriver"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="12dp"
+           android:text="司机"
+           android:textSize="20sp"
+           android:textColor="#007fff"
+           />
+       <TextView
+           android:id="@+id/textdriver"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="20dp"
+           android:text="0"
+           android:textSize="30sp"
+           android:textColor="#70dbdb"
+           android:layout_toRightOf="@id/textDriver"
+           android:layout_alignBottom="@id/textDriver"
+           android:layout_marginStart="20dp" />
+       <TextView
+           android:id="@+id/textSex"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/textdriver"
+           android:layout_marginLeft="70dp"
+           android:layout_alignBottom="@id/textDriver"
+           android:text="性别"
+           android:textColor="#007fff"
+           android:textSize="20sp"/>
+       <TextView
+           android:id="@+id/textsex"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/textSex"
+           android:layout_marginLeft="20dp"
+           android:layout_alignBottom="@id/textDriver"
+           android:text="0"
+           android:textColor="#70dbdb"
+           android:textSize="30sp"/>
+       <TextView
+           android:id="@+id/textAge"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/textsex"
+           android:layout_marginLeft="70dp"
+           android:layout_alignBottom="@id/textDriver"
+           android:text="年龄"
+           android:textColor="#007fff"
+           android:textSize="20sp"/>
+       <TextView
+           android:id="@+id/textage"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/textAge"
+           android:layout_marginLeft="20dp"
+           android:layout_alignBottom="@id/textDriver"
+           android:text="0"
+           android:textColor="#70dbdb"
+           android:textSize="30sp"/>
+       <TextView
+           android:id="@+id/textWeight"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/textage"
+           android:layout_marginLeft="70dp"
+           android:layout_alignBottom="@id/textDriver"
+           android:text="体重"
+           android:textColor="#007fff"
+           android:textSize="20sp"/>
+       <TextView
+           android:id="@+id/textweight"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/textWeight"
+           android:layout_marginLeft="20dp"
+           android:layout_alignBottom="@id/textDriver"
+           android:text="0"
+           android:textColor="#70dbdb"
+           android:textSize="30sp"/>
+       <TextView
+           android:id="@+id/textkg"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/textweight"
+           android:layout_marginLeft="8dp"
+           android:layout_alignBottom="@id/textDriver"
+           android:text="kg"
+           android:textColor="#70dbdb"
+           android:textSize="30sp"/>
+   </RelativeLayout>
+
+     <RelativeLayout
+      android:id="@+id/center"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_alignParentTop="true"
+      android:layout_marginTop="120dp"
+      android:layout_alignParentLeft="true">
+
+    <ImageView
+        android:id="@+id/heartImg"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="160dp"
+        android:src="@drawable/heart" />
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="130dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="92dp"
+        android:text="12:12"
+        android:textColor="#ff7f00"
+        android:textSize="60dp" />
+
+    <TextView
+        android:id="@+id/textWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/textTime"
+        android:layout_below="@+id/textTime"
+        android:text="星期二"
+        android:textColor="#70dbdb"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/textTime"
+        android:layout_below="@+id/textWeek"
+        android:text="5月6日"
+        android:textColor="#70dbdb"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/Temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textTime"
+        android:layout_marginEnd="222dp"
+        android:layout_marginRight="222dp"
+        android:paddingRight="30dp"
+        android:text="体温"
+        android:textColor="#70dbdb"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignBaseline="@+id/Temperature"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="159dp"
+        android:layout_marginRight="159dp"
+        android:text="0"
+        android:textColor="#99cc32"
+        android:textSize="45dp" />
+
+    <TextView
+        android:id="@+id/Tem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Temperature"
+        android:layout_marginLeft="-159dp"
+        android:layout_marginStart="-159dp"
+        android:layout_toEndOf="@+id/temperature"
+        android:layout_toRightOf="@+id/temperature"
+        android:text="℃"
+        android:textColor="#99cc32"
+        android:textSize="45dp" />
+
+    <TextView
+        android:id="@+id/Bloodpress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/Temperature"
+        android:layout_below="@id/Temperature"
+        android:layout_marginTop="35sp"
+        android:paddingRight="5dp"
+        android:text="血压"
+        android:textColor="#70dbdb"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/lowpress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textWeek"
+        android:layout_toStartOf="@+id/gang"
+        android:text="0"
+        android:textColor="#99cc32"
+        android:textSize="40dp"
+        android:layout_toLeftOf="@+id/gang" />
+
+    <TextView
+        android:id="@+id/gang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textWeek"
+        android:layout_toStartOf="@+id/hightpress"
+        android:text="/"
+        android:textColor="#99cc32"
+        android:textSize="45dp"
+        android:layout_toLeftOf="@+id/hightpress" />
+
+    <TextView
+        android:id="@+id/hightpress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textWeek"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="96dp"
+        android:text="0"
+        android:textColor="#99cc32"
+        android:textSize="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="96dp" />
+
+    <TextView
+        android:id="@+id/Bloodfat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/Temperature"
+        android:layout_below="@id/Bloodpress"
+        android:layout_marginTop="35dp"
+        android:paddingRight="35dp"
+        android:text="血脂"
+        android:textColor="#70dbdb"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/bloodfat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/Bloodfat"
+        android:layout_marginEnd="133dp"
+        android:layout_marginRight="133dp"
+        android:text="0"
+        android:textColor="#99cc32"
+        android:textSize="35dp" />
+
+    <TextView
+        android:id="@+id/Heart"
+        android:layout_width="wrap_content"
+        android:layout_height="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="146dp"
+        android:text="0"
+        android:textSize="70dp"
+        android:textStyle="bold"
+        android:textColor="#236b8e"/>
+
+    <TextView
+        android:id="@+id/heart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Heart"
+        android:layout_centerHorizontal="true"
+        android:text="次/min"
+        android:textSize="26dp"
+        android:textColor="#236b8e"/>
+
+  </RelativeLayout>
+
+     <RelativeLayout
+         android:id="@+id/buttom"
+         android:layout_width="match_parent"
+         android:layout_height="130dp"
+         android:layout_below="@id/center">
+         <TextView
+             android:id="@+id/ui"
+             android:layout_width="600dp"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="400dp"
+             android:layout_centerVertical="true"
+             android:text="@string/text"
+             android:textColor="#70dbdb"
+             android:textSize="30dp"/>
+
+
+     </RelativeLayout>
+      <ImageView
+          android:id="@+id/power"
+          android:layout_width="70dp"
+          android:layout_height="70dp"
+          android:src="@drawable/power"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentLeft="true"
+          android:layout_marginLeft="20dp"
+          android:layout_marginBottom="50dp"/>
+      <ImageView
+        android:id="@+id/setting"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/setting"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp"/>
+
+
+
+</RelativeLayout>

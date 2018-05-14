@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="text">你知道吗 每隔一分钟你的生命就少了60秒</string>
+</resources>
