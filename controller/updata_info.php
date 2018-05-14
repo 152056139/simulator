@@ -6,6 +6,7 @@
  * Time: 下午3:13
  */
 include_once "../class/Database.php";
+include_once "../class/Tools.php";
 
 $conn = Database::getConnection();
 
@@ -19,9 +20,9 @@ $weight = $_POST['weight'];
 $sql = "UPDATE `user` SET user_name='{$name}', user_sex='{$sex}', user_birthday='{$birthday}', user_height='{$height}', user_weight='{$weight}' WHERE user_phone=$phone";
 if($conn->query($sql) == true)
 {
-    echo "修改成功";
+    Tools::response("success", "修改成功");
 }
 else
 {
-    echo "修改失败";
+    Tools::response("failed", "修改失败");
 }
