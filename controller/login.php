@@ -29,6 +29,6 @@ if ($result_count->fetch_row()[0] == 0) {
     }
     else
     {
-        Tools::response("failed", "登陆失败，请稍后重试");
+        Tools::response("failed", "密码错误，请确认后再试。");
     }
 }
