@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/usr/local/hadoop/lib/hadoop-core-1.2.1.jar"/>
+	<classpathentry kind="lib" path="src/lib/mysql-connector-java-5.1.39-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
