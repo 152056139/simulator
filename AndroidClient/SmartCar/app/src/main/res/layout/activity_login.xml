@@ -52,7 +52,7 @@
                     android:id="@+id/input_phonenum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
+                    android:hint="@string/prompt_phone_number"
                     android:imeOptions="actionNext"
                     android:inputType="phone"
                     android:maxLength="11"
