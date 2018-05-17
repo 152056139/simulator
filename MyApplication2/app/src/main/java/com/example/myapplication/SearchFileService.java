@@ -126,7 +126,7 @@ public class SearchFileService extends Service {
             RequestBody requestBody = mbody.build();
             Request request = new Request.Builder()
                     .header("Authorization", "Client-ID " + "...")
-                    .url("http://192.168.1.226:8080/controller/upload_file.php")
+                    .url("http://172.20.10.7:8080/controller/upload_file.php")
                     .post(requestBody)
                     .build();
 

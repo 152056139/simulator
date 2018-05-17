@@ -25,6 +25,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -175,7 +176,7 @@ public class MyService extends Service {
             Log.d("service", "socket service -----------------------");
             try {
                 // 实例化ServerSocket对象并设置端口号为 12580
-                clientSocket = new Socket("192.168.1.226", 12580);
+                clientSocket = new Socket("172.20.10.7", 12580);
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
 
                 while (true) {
@@ -249,7 +250,8 @@ public class MyService extends Service {
                         //向主线程发送数据↓
                         returnMessage(9, humidityValue);
 //总结数据存入文件中*****************************************************
-                        data=String.valueOf(new Date().getTime())+" "+weightValue+" "+ageValue+" "+sexValue+" "+temValue+" "+lowValue+" "+highValue+" "+heartValue+" "+oxygenValue+" "+humidityValue+"\n";
+                        String carId="冀G84555";
+                        data=String.valueOf(new Date().getTime())+" "+weightValue+" "+ageValue+" "+sexValue+" "+temValue+" "+lowValue+" "+highValue+" "+heartValue+" "+oxygenValue+" "+humidityValue+" "+carId+"\n";
                         setInFile(fileName,data);
                         returnMessage(0, fileName);
 

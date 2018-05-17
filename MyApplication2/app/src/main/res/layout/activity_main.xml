@@ -113,13 +113,13 @@
       android:layout_marginTop="120dp"
       android:layout_alignParentLeft="true">
 
-    <ImageView
-        android:id="@+id/heartImg"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="160dp"
-        android:src="@drawable/heart" />
+         <ImageView
+             android:id="@+id/heartImg"
+             android:layout_width="250dp"
+             android:layout_height="250dp"
+             android:layout_centerInParent="true"
+             android:layout_marginTop="160dp"
+             android:src="@drawable/heart" />
 
     <TextView
         android:id="@+id/textTime"
@@ -293,23 +293,24 @@
 
   </RelativeLayout>
 
-     <RelativeLayout
-         android:id="@+id/buttom"
-         android:layout_width="match_parent"
-         android:layout_height="130dp"
-         android:layout_below="@id/center">
-         <TextView
-             android:id="@+id/ui"
-             android:layout_width="600dp"
-             android:layout_height="wrap_content"
-             android:layout_marginLeft="400dp"
-             android:layout_centerVertical="true"
-             android:text="@string/text"
-             android:textColor="#70dbdb"
-             android:textSize="30dp"/>
+    <RelativeLayout
+        android:id="@+id/buttom"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:layout_below="@id/center">
+
+        <TextView
+            android:id="@+id/ai"
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="400dp"
+            android:text="@string/text"
+            android:textColor="#70dbdb"
+            android:textSize="30dp" />
 
 
-     </RelativeLayout>
+    </RelativeLayout>
       <ImageView
           android:id="@+id/power"
           android:layout_width="70dp"
@@ -328,6 +329,33 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="50dp"/>
+    <ImageView
+        android:id="@+id/outer"
+        android:layout_width="193dp"
+        android:layout_height="193dp"
+        android:src="@drawable/outer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="200dp"
+        android:layout_marginBottom="43dp"/>
+    <ImageView
+        android:id="@+id/middle"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:src="@drawable/middle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="215dp"
+        android:layout_marginBottom="56dp"/>
+    <ImageView
+        android:id="@+id/lining"
+        android:layout_width="152dp"
+        android:layout_height="152dp"
+        android:src="@drawable/lining"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="223dp"
+        android:layout_marginBottom="65dp"/>
 
 
 
