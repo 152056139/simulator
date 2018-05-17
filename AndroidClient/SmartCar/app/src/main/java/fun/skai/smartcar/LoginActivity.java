@@ -1,24 +1,39 @@
 package fun.skai.smartcar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
-    //private UserLoginTask mAuthTask = null;
+    private static final int LOGIN_FAILED = 0;
+    private static final int LOGIN_SUCCESS = 1;
 
     // UI 相关
     private EditText mPhoneNumView;
@@ -27,19 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView mRegisterLink;
     private View mLoginFormView;
     private View mLoginProgressView;
-
-//    @BindView(R.id.input_phonenum)
-//    EditText mPhoneNumView;
-//    @BindView(R.id.input_password)
-//    EditText mPasswordView;
-//    @BindView(R.id.login_button)
-//    Button mLoginButton;
-//    @BindView(R.id.signup_link)
-//    TextView mSignupLink;
-//    @BindView(R.id.login_form)
-//    View mLoginFormView;
-//    @BindView(R.id.login_progress)
-//    View mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,42 +57,194 @@ public class LoginActivity extends AppCompatActivity {
      * 初始化控件
      */
     protected void initView() {
-//        mSignupLink.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-////                startActivity(intent);
-////                finish();
-////                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-//            }
-//        });
-//        mLoginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //attemptLogin();
-//            }
-//        });
-        mPhoneNumView = findViewById(R.id.input_phonenum);
-        mPhoneNumView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mLoginFormView = findViewById(R.id.login_form);
+        mLoginProgressView = findViewById(R.id.login_progress);
+
+        // 注册
+        mRegisterLink = findViewById(R.id.signup_link);
+        mRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    String phoneNum = mPhoneNumView.getText().toString();
-                    verifyPhoneNum(phoneNum);
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
-        mPasswordView = findViewById(R.id.input_password);
-        mPasswordView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        // 验证手机号
+        mPhoneNumView = findViewById(R.id.input_phonenum);
+        mPhoneNumView.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    String password = mPasswordView.getText().toString();
-                    verifyPassword(password);
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // FIXME: 2018/5/14 便于测试先注释了
+//                String phoneNum = mPhoneNumView.getText().toString();
+//                if (!verifyPhoneNum(phoneNum)) {
+//                    mLoginButton.setEnabled(false);
+//                    mPhoneNumView.requestFocus();
+//                } else {
+//                    mLoginButton.setEnabled(true);
+//                }
             }
         });
 
+        // 验证密码
+        mPasswordView = findViewById(R.id.input_password);
+        mPasswordView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // FIXME: 2018/5/14 便于测试想注释了
+//                String password = mPasswordView.getText().toString();
+//                if (!verifyPassword(password)) {
+//                    mLoginButton.setEnabled(false);
+//                    mPasswordView.requestFocus();
+//                } else {
+//                    mLoginButton.setEnabled(true);
+//                }
+            }
+        });
+        // 尝试登录
+        mLoginButton = findViewById(R.id.login_button);
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptLogin();
+            }
+        });
+    }
+
+    /**
+     * 尝试登录
+     */
+    private void attemptLogin() {
+        String phonenum = mPhoneNumView.getText().toString().trim();
+        String password = mPasswordView.getText().toString().trim();
+        showProgress(true);
+        authentication(phonenum, password);
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case LOGIN_FAILED:
+                    onLoginFailed((String) msg.obj);
+                    break;
+                case LOGIN_SUCCESS:
+                    onLoginSuccess((String) msg.obj);
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 登录成功
+     * @param message 服务器返回的成功信息
+     */
+    private void onLoginSuccess(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+        showProgress(false);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * 登录失败
+     * @param message 服务器返回的失败信息
+     */
+    private void onLoginFailed(String message) {
+        showProgress(false);
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * 解析服务器返回的字符串
+     * @param result 服务器响应的字符串
+     */
+    private void resolveJson(String result) {
+        try {
+            // 从
+            String json = result.subSequence(
+                    result.indexOf("\"") + 1, result.lastIndexOf("\"")).toString();
+            Log.d(TAG, "resolveJson: json=" + json);
+            JSONObject jsonObject = new JSONObject(json);
+            String status = jsonObject.getString("status");
+            Message message = new Message();
+            if (status.equals("failed")) {
+                message.what = LOGIN_FAILED;
+            } else if (status.equals("success")) {
+                message.what = LOGIN_SUCCESS;
+            }
+            message.obj = jsonObject.getString("message");
+            handler.sendMessage(message);
+        } catch (JSONException e) {
+            // TODO: 2018/5/15 处理解析异常
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 开启子线程，进行身份验证
+     * @param phone 手机号
+     * @param password 密码
+     */
+    private void authentication(final String phone, final String password) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FormBody body = new FormBody.Builder()
+                        .add("phone", phone)
+                        .add("password", password)
+                        .build();
+                Request request = new Request.Builder()
+                        .url("http://192.168.1.226:8080/controller/login.php")
+                        .post(body)
+                        .build();
+                OkHttpClient client = new OkHttpClient();
+                String result = null;
+                try {
+                    Response response = client.newCall(request).execute();
+                    result = response.body().string();
+                    Log.d(TAG, "run: result=" + result);
+                    resolveJson(result);
+                } catch (IOException e) {
+                    // TODO: 2018/5/14 处理登录异常
+                    Log.e(TAG, "run: Failed to connect to server");
+                }
+            }
+        }).start();
+    }
+
+
+
+    /**
+     * 显示进度
+     * @param show 是否显示
+     */
+    private void showProgress(boolean show) {
+        mLoginProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
     /**
@@ -102,11 +256,16 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(phonenum)) {
             mPhoneNumView.setError(getString(R.string.error_phonenum_field_required));
             return false;
-        } else if (!isPhonenumValid(phonenum)) {
-            mPhoneNumView.setError(getString(R.string.error_invalid_phone_number));
-            return false;
+        } else {
+            String regExp = "^((13[0-9])|(18[0-9])|(17[135-8])|(14[579])|(15[0-35-9]))\\d{8}$";
+            Pattern pattern = Pattern.compile(regExp);
+            Matcher matcher = pattern.matcher(phonenum);
+            if (!matcher.matches()) {
+                mPhoneNumView.setError(getString(R.string.error_invalid_phone_number));
+                return false;
+            }
+            return true;
         }
-        return true;
     }
 
     /**
@@ -118,95 +277,15 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_password_field_required));
             return false;
-        } else if (!isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            return false;
+        } else {
+            String regExp = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$";
+            Pattern pattern = Pattern.compile(regExp);
+            Matcher matcher = pattern.matcher(password);
+            if (!matcher.matches()) {
+                mPasswordView.setError(getString(R.string.error_invalid_password));
+                return false;
+            }
+            return true;
         }
-        return true;
     }
-
-    /**
-     * 手机号是否有效
-     * @param phone 手机号
-     * @return true 手机号有效 false 手机号无效
-     */
-    private boolean isPhonenumValid(String phone) {
-        String regExp = "^((13[0-9])|(18[0-9])|(17[135-8])|(14[579])|(15[0-35-9]))\\d{8}$";
-        Pattern pattern = Pattern.compile(regExp);
-        Matcher matcher = pattern.matcher(phone);
-        return matcher.matches();
-    }
-
-    /**
-     * 密码是否有效
-     * @param password
-     * @return
-     */
-    private boolean isPasswordValid(String password) {
-        String regExp = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$";
-        Pattern pattern = Pattern.compile(regExp);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
-    }
-
-//    private void attemptLogin() {
-//        Log.d(TAG, "attemptLogin: execute");
-//
-//        if (mAuthTask != null) {
-//            return;
-//        }
-//
-//        // 重置错误
-//        mPhoneNumView.setError(null);
-//        mPasswordView.setError(null);
-//
-//        // 尝试登陆的时候存储手机号和密码
-//        String email = mPhoneNumView.getText().toString();
-//        String password = mPasswordView.getText().toString();
-//
-//        boolean cancel;
-//        View focusView = null;
-//
-//        if (!validateInfoInput()) {
-//            onLoginFailed();
-//            return;
-//        }
-//
-//        mLoginButton.setEnabled(false);
-//        //ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,R.)
-//    }
-
-    private void onLoginFailed() {
-
-    }
-
-    private boolean validateInfoInput() {
-        return false;
-    }
-
-
-
-
-
-//    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-//        private final String mEmail;
-//        private final String mPassword;
-//
-//        public UserLoginTask(String mEmail, String mPassword) {
-//            this.mEmail = mEmail;
-//            this.mPassword = mPassword;
-//        }
-//
-//        @Override
-//        protected Boolean doInBackground(Void... voids) {
-//            // TODO: 2018/5/11 添加身份认证代码
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Boolean aBoolean) {
-//            super.onPostExecute(aBoolean);
-//        }
-//    }
-
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <conf>
     <switch>true</switch>
-    <sleeptime>2</sleeptime>
+    <sleeptime>3</sleeptime>
     <max_low_pressure>70</max_low_pressure>
     <min_low_pressure>80</min_low_pressure>
     <max_high_pressure>110</max_high_pressure>
@@ -12,7 +12,7 @@
     <min_breathe_rate>25</min_breathe_rate>
     <max_body_temperature>36</max_body_temperature>
     <min_body_temperature>38</min_body_temperature>
-    <max_car_rate>5</max_car_rate>
+    <max_car_rate>2</max_car_rate>
     <min_car_rate>0</min_car_rate>
     <max_car_temperature>25</max_car_temperature>
     <min_car_temperature>25</min_car_temperature>

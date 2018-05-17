@@ -22,13 +22,12 @@ $result = $conn->query($sql_count);
 if ($result->fetch_row()[0] == 0) {
     $sql = "INSERT INTO user (user_phone, user_password) VALUES ($phone, '$password')";
     if ($conn->query($sql) === true) {
-
-        echo "用户注册成功";
+        Tools::response("success", "注册成功。");
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        Tools::response("failed", "注册失败，请稍后再试。");
     }
 } else {
-    echo "手机号已存在";
+    Tools::response("failed", "手机号已存在");
 }
 
 $conn->close();

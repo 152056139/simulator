@@ -21,8 +21,7 @@ $accept_resource = socket_accept($socket);
 echo "接收到链接\n";
 while (true) {
     echo "读取配置文件\n";
-    $conf = simplexml_load_file("conf.xml");
-    
+    $conf = simplexml_load_file("/Library/WebServer/Documents/simulator/simulator/conf.xml");
     if ($conf->switch == 'true') {
         echo "开关状态为打开\n";
         echo "开始生成数据\n";

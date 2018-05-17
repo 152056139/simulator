@@ -6,6 +6,7 @@
  * Time: 上午11:35
  */
 include_once "../class/Database.php";
+include_once "../class/Tools.php";
 $conn = Database::getConnection();
 
 $phone = $_POST['phone'];
@@ -17,17 +18,17 @@ $sql_count = "SELECT  COUNT(user_phone) FROM `user` WHERE user_phone='$phone'";
 $result_count = $conn->query($sql_count);
 
 if ($result_count->fetch_row()[0] == 0) {
-    echo "该用户不存在";
+    Tools::response("failed", "该用户不存在");
 } else {
     $sql = "SELECT user_password FROM user WHERE user_phone='$phone'";
     $result = $conn->query($sql);
     $form_password = $result->fetch_row()[0];
     if($form_password == $password)
     {
-        echo "登陆成功";
+        Tools::response("success", "登陆成功");
     }
     else
     {
-        echo "登陆失败";
+        Tools::response("failed", "密码错误，请确认后再试。");
     }
 }
