@@ -21,32 +21,25 @@ $accept_resource = socket_accept($socket);
 echo "接收到链接\n";
 while (true) {
     echo "读取配置文件\n";
-    $conf = simplexml_load_file("/Library/WebServer/Documents/simulator/simulator/conf.xml");
+    $conf = simplexml_load_file("./conf.xml");
+    $acceleration = (Float)$conf->acceleration;
     if ($conf->switch == 'true') {
         echo "开关状态为打开\n";
         echo "开始生成数据\n";
-        $data["low_pressure"] = sprintf("%.2f",
-            randFloat($conf->min_low_pressure, $conf->max_low_pressure));
-        $data["high_pressure"] = sprintf("%.2f",
-            randFloat($conf->min_high_pressure, $conf->max_high_pressure));
-        $data["heart_rate"] = sprintf("%.2f",
-            randFloat($conf->min_heart_rate, $conf->max_heart_rate));
-        $data["breathe_rate"] = sprintf("%.2f",
-            randFloat($conf->min_breathe_rate, $conf->max_breathe_rate));
-        $data["body_temperature"] = sprintf("%.2f",
-            randFloat($conf->min_body_temperature, $conf->max_body_temperature));
-        $data["car_rate"] = sprintf("%.2f",
-            randFloat($conf->min_car_rate, $conf->max_car_rate));
-        $data["car_temperature"] = sprintf("%.2f",
-            randFloat($conf->min_car_temperature, $conf->max_car_temperature));
-        $data["oxygen"] = sprintf("%.2f",
-            randFloat($conf->min_oxygen, $conf->max_oxygen));
-        $data["humidity"] = sprintf("%.2f",
-            randFloat($conf->min_humidity, $conf->max_humidity));
 
-        
+        $data["low_pressure"] = getData($conf, "low_pressure", $acceleration);
+        $data["high_pressure"] = getData($conf, "high_pressure", $acceleration);
+        $data["heart_rate"] = getData($conf, "heart_rate", $acceleration);
+        $data["breathe_rate"] = getData($conf, "breathe_rate", $acceleration);
+        $data["body_temperature"] = getData($conf, "body_temperature", $acceleration);
+        $data["car_rate"] = getData($conf, "car_rate", $acceleration);
+        $data["car_temperature"] = getData($conf, "car_temperature", $acceleration);
+        $data["oxygen"] = getData($conf, "oxygen", $acceleration);
+        $data["humidity"] = getData($conf, "humidity", $acceleration);
+
+
         $msg = json_encode($data) . PHP_EOL;
-        //Tools::log("DATA", $msg);
+
         print_r($msg);
 
         echo "发送socket\n";
@@ -70,5 +63,34 @@ exit();
 function randFloat($min = 0, $max = 1)
 {
     return $min + mt_rand() / mt_getrandmax() * ($max - $min);
+}
+
+function getData($conf, $name, $acceleration)
+{
+    $strvalue = "value_" . $name;
+    $strmin = "min_" . $name;
+    $strmax = "max_" . $name;
+        
+    $value = (Float)$conf->$strvalue;
+    $min = (Float)$conf->$strmin;
+    $max = (Float)$conf->$strmax;
+
+    if ($value < $min) {
+        $data = sprintf("%.2f", $min + 1);
+    } else if ($value > $max) {
+        $data = sprintf("%.2f", $max - 1);
+    } else {
+        if (rand(0, 1) == 0) {
+            $data = sprintf("%.2f", ($value - $value * $acceleration));
+        } else {
+            $data = sprintf("%.2f", ($value + $value * $acceleration));
+        }
+    }
+    $conf->$strvalue = $data;
+    $new_conf = $conf->asXML();
+    $fp = fopen("./conf.xml", "w+");
+    fwrite($fp, $new_conf);
+    fclose($fp);
+    return $data;
 }
 
