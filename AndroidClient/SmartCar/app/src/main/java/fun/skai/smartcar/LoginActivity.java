@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private Button mLoginButton;
     private TextView mRegisterLink;
+    private TextView mResetPasswordLink;
     private View mLoginFormView;
     private View mLoginProgressView;
 
@@ -71,6 +72,19 @@ public class LoginActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
+        // 重置密码
+        mResetPasswordLink = findViewById(R.id.reset_password_link);
+        mResetPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2018/5/19 修改代码传到重置密码页
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            }
+        });
+
         // 验证手机号
         mPhoneNumView = findViewById(R.id.input_phonenum);
         mPhoneNumView.addTextChangedListener(new TextWatcher() {
