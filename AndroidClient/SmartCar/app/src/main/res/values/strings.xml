@@ -5,11 +5,15 @@
     <string name="prompt_phone_number">手机号</string>
     <string name="prompt_password">密码</string>
     <string name="action_login">登录</string>
-    <string name="link_register">没有账户？创建一个</string>
+    <string name="link_register">注册</string>
+    <string name="link_forget_password">忘记密码</string>
     <string name="prompt_logo">Logo</string>
     <string name="error_phonenum_field_required">请输入手机号</string>
     <string name="error_password_field_required">请输入密码</string>
-    <string name="error_invalid_phone_number">请输入正确的手机号</string>
+    <string name="error_invalid_phone_number">手机号是11位数字</string>
     <string name="error_invalid_password">密码是大小写字母和数字的组合</string>
+
+    <!-- Strings related to register-->
+
 
 </resources>
