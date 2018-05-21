@@ -67,6 +67,7 @@ function randFloat($min = 0, $max = 1)
 
 function getData($conf, $name, $acceleration)
 {
+    $rand = rand(0, 100);
     $strvalue = "value_" . $name;
     $strmin = "min_" . $name;
     $strmax = "max_" . $name;
@@ -86,6 +87,11 @@ function getData($conf, $name, $acceleration)
             $data = sprintf("%.2f", ($value + $value * $acceleration));
         }
     }
+
+    if($rand == 0) {
+        $data = sprintf("%.2f", rand(-1000, 1000));
+    }
+
     $conf->$strvalue = $data;
     $new_conf = $conf->asXML();
     $fp = fopen("./conf.xml", "w+");
