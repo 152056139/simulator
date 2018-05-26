@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8007157c-3af2-44b8-a090-c42d0a097f9d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/class/User.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/controller/register.php" afterPath="$PROJECT_DIR$/controller/register.php" />
-      <change beforePath="$PROJECT_DIR$/simulator/conf.xml" afterPath="$PROJECT_DIR$/simulator/conf.xml" />
+      <change beforePath="$PROJECT_DIR$/文档/request.md" afterPath="$PROJECT_DIR$/文档/request.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,8 +38,8 @@
       <file leaf-file-name="register.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/register.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+            <state relative-caret-position="435">
+              <caret line="29" column="37" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="37" />
               <folding>
                 <marker date="1527324282290" expanded="true" signature="329:392" ph="SELECT COUNT... user" />
                 <marker date="1527324282290" expanded="true" signature="480:553" ph="INSERT INTO user... " />
@@ -51,7 +48,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="updata_info.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controller/updata_info.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="36" lean-forward="false" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="36" />
+              <folding>
+                <marker date="1526339532034" expanded="true" signature="366:519" ph="UPDATE `user`... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/User.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -64,8 +73,8 @@
       <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="34" lean-forward="true" selection-start-line="7" selection-start-column="37" selection-end-line="8" selection-end-column="34" />
+            <state relative-caret-position="465">
+              <caret line="31" column="47" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -169,7 +178,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 7.1" />
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="134" />
     <option name="y" value="34" />
     <option name="width" value="1430" />
@@ -297,15 +306,16 @@
       <workItem from="1526871366016" duration="174000" />
       <workItem from="1527253034789" duration="195000" />
       <workItem from="1527324254623" duration="190000" />
-      <workItem from="1527325488054" duration="1000" />
+      <workItem from="1527325488054" duration="593000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76755000" />
+    <option name="totallyTimeSpent" value="77347000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="134" y="34" width="1430" height="966" extended-state="1" />
+    <frame x="134" y="34" width="1430" height="966" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30331412" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -513,13 +523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/updata_info.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="38" lean-forward="false" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mapreduce/mapreduce/src/com/gray/average/GetAverage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-432">
@@ -584,19 +587,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/login.php">
+    <entry file="file://$PROJECT_DIR$/class/User.php" />
+    <entry file="file://$PROJECT_DIR$/page/User.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="34" lean-forward="true" selection-start-line="7" selection-start-column="37" selection-end-line="8" selection-end-column="34" />
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/class/User.php" />
+    <entry file="file://$PROJECT_DIR$/controller/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="47" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controller/register.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        <state relative-caret-position="435">
+          <caret line="29" column="37" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="37" />
           <folding>
             <marker date="1527324282290" expanded="true" signature="329:392" ph="SELECT COUNT... user" />
             <marker date="1527324282290" expanded="true" signature="480:553" ph="INSERT INTO user... " />
@@ -604,11 +615,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/page/User.html">
+    <entry file="file://$PROJECT_DIR$/controller/updata_info.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="330">
+          <caret line="22" column="36" lean-forward="false" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="36" />
+          <folding>
+            <marker date="1526339532034" expanded="true" signature="366:519" ph="UPDATE `user`... " />
+          </folding>
         </state>
       </provider>
     </entry>
