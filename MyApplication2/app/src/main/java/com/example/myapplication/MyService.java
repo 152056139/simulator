@@ -12,9 +12,11 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -88,17 +90,7 @@ public class MyService extends Service {
                 e.printStackTrace();
             }Log.d("message", "++++++:" + jsonObject);
             return a;
-            /*try {
-                 jsonObject1 = new JSONObject(a);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            String value = null;
-            try {
-                value = jsonObject1.get("value").toString();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
+
 
 
 
@@ -171,12 +163,33 @@ public class MyService extends Service {
                 System.out.print("文件中读取到的数据" + dataFile);
             }return  dataFile;
         }
+        //获取当前时间
+        private JSONObject getTime(){
+            Date nowDate = new Date();
+            JSONObject jsonObject=new JSONObject();
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("E");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat2=new SimpleDateFormat("MM月dd日");
+            String nowTime=simpleDateFormat.format(nowDate);
+            String nowWeek=simpleDateFormat1.format(nowDate);
+            String dateNow=simpleDateFormat2.format(nowDate);
+            try {
+                jsonObject.put("nowTime",nowTime);
+                jsonObject.put("nowWeek",nowWeek);
+                jsonObject.put("dateNow",dateNow);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return jsonObject;
+
+
+        }
 
         public void run() {
             Log.d("service", "socket service -----------------------");
             try {
                 // 实例化ServerSocket对象并设置端口号为 12580
-                clientSocket = new Socket("172.20.10.7", 12580);
+                clientSocket = new Socket("192.168.1.191", 12580);
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
 
                 while (true) {
@@ -254,8 +267,21 @@ public class MyService extends Service {
                         data=String.valueOf(new Date().getTime())+" "+weightValue+" "+ageValue+" "+sexValue+" "+temValue+" "+lowValue+" "+highValue+" "+heartValue+" "+oxygenValue+" "+humidityValue+" "+carId+"\n";
                         setInFile(fileName,data);
                         returnMessage(0, fileName);
-
-
+//获取当前时间**********************************************************
+                        JSONObject jsonObject=getTime();
+                        String nowTime="";
+                        String nowWeek="";
+                        String dateNow="";
+                        try {
+                             nowTime= (String) jsonObject.get("nowTime");
+                             nowWeek=(String)jsonObject.get("nowWeek");
+                             dateNow=(String)jsonObject.get("dateNow");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        returnMessage(10,nowTime);
+                        returnMessage(11,nowWeek);
+                        returnMessage(12,dateNow);
                     }
                 }
             } catch (IOException e) {
