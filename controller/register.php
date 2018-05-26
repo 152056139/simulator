@@ -6,7 +6,7 @@
  * Time: 上午10:23
  */
 include_once "../class/Database.php";
-
+include_once "../class/Tools.php";
 // 接收表单数据
 $phone = $_POST['phone'];
 $password = $_POST['password'];
