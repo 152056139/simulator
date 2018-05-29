@@ -17,12 +17,22 @@ $birthday = $_POST['birthday'];
 $height = $_POST['height'];
 $weight = $_POST['weight'];
 
-$sql = "UPDATE `user` SET user_name='{$name}', user_sex='{$sex}', user_birthday='{$birthday}', user_height='{$height}', user_weight='{$weight}' WHERE user_phone=$phone";
-if($conn->query($sql) == true)
-{
-    Tools::response("success", "修改成功");
+// 判断用户是否存在
+$sql_count = "SELECT  COUNT(user_phone) FROM `user` WHERE user_phone='$phone'";
+$result_count = $conn->query($sql_count);
+if ($result_count->fetch_row()[0] == 0) {
+    Tools::response("failed", "该用户不存在");
+} else {
+    $sql = "UPDATE `user` SET user_name='{$name}', user_sex='{$sex}', user_birthday='{$birthday}', user_height='{$height}', user_weight='{$weight}' WHERE user_phone=$phone";
+    if($conn->query($sql) == true)
+    {
+        Tools::response("success", "修改成功");
+    }
+    else
+    {
+        Tools::response("failed", "修改失败");
+    }
 }
-else
-{
-    Tools::response("failed", "修改失败");
-}
+
+
+
