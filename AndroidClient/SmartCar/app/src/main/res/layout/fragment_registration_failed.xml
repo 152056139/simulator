@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.RegistrationFailedFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="48dp"
+        android:contentDescription="@string/prompt_registration_failed"
+        android:src="@drawable/registration_failed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/prompt_registration_failed"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="24sp"
+        tools:targetApi="jelly_bean" />
+
+    <TextView
+        android:id="@+id/register_error_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:text="@string/error_register_user_exists" />
+
+    <Button
+        android:id="@+id/register_to_login"
+        android:layout_gravity="center"
+        android:text="@string/action_to_login"
+        android:layout_marginTop="96dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

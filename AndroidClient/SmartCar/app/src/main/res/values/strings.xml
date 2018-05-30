@@ -4,6 +4,7 @@
     <!-- Strings related to login -->
     <string name="prompt_phone_number">手机号</string>
     <string name="prompt_password">密码</string>
+    <string name="prompt_repassword">确认密码</string>
     <string name="action_login">登录</string>
     <string name="link_register">注册</string>
     <string name="link_forget_password">忘记密码</string>
@@ -13,7 +14,26 @@
     <string name="error_invalid_phone_number">手机号是11位数字</string>
     <string name="error_invalid_password">密码是大小写字母和数字的组合</string>
 
-    <!-- Strings related to register-->
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Strings related to register-->
+    <string name="action_register">注册</string>
+    <string name="error_repassword_field_required">请输入确认密码</string>
+    <string name="error_invalid_repassword">两次密码不一样，请重新输入</string>
+    <string name="error_unfinished_form">请按照要求填写完整的信息</string>
+    <string name="prompt_registration_success">注册成功</string>
+    <string name="prompt_complete_information">您已注册成功，请完善个人信息以便获取更好的服务</string>
+    <string name="action_complete_info">完善个人信息</string>
+    <string name="prompt_registration_failed">注册失败</string>
+    <string name="error_register_user_exists">用户已存在</string>
+    <string name="action_to_login">前往登录</string>
+    <string name="prompt_username">姓名</string>
+    <string name="prompt_gender">性别</string>
+    <string name="prompt_birthday">生日</string>
+    <string name="prompt_height">身高</string>
+    <string name="prompt_weight">体重</string>
+    <string name="prompt_complete_info_header">以下内容有助于我们更准确的分析您在驾驶过程中的身体状况，请完善信息并保证信息的准确性 我们承诺为您的信息保密</string>
+    <string name="all_done">完成</string>
 
 </resources>
