@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -293,6 +294,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //方法：分析身体状况
+
+    /**
+     *
+     * @param jsonObject
+     */
     private void analyzeCondition(JSONObject jsonObject) {
         String breathe = "";
         String high = "";
