@@ -1,4 +1,4 @@
-package fun.skai.smartcar;
+package fun.skai.smartcar.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -20,9 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import fun.skai.smartcar.R;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -101,12 +99,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 // FIXME: 2018/5/14 便于测试先注释了
-//                String phoneNum = mPhoneNumView.getText().toString();
-//                if (!verifyPhoneNum(phoneNum)) {
-//                    mLoginButton.setEnabled(false);
-//                    mPhoneNumView.requestFocus();
+                // TODO: 2018/5/25 分离判断和视图更新，待测试
+//                String phoneNumber = mPhoneNumView.getText().toString().trim();
+//                if (TextUtils.isEmpty(phoneNumber)) {
+//                    mPhoneNumView.setError(getString(R.string.error_phonenum_field_required));
 //                } else {
-//                    mLoginButton.setEnabled(true);
+//                    if (VerifyInformation.isPhoneNumberValid(phoneNumber)) {
+//                        mLoginButton.setEnabled(true);
+//                    } else {
+//                        mPhoneNumView.setError(getString(R.string.error_invalid_phone_number));
+//                        mLoginButton.setEnabled(false);
+//                        mPhoneNumView.requestFocus();
+//                    }
 //                }
             }
         });
@@ -127,12 +131,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 // FIXME: 2018/5/14 便于测试想注释了
-//                String password = mPasswordView.getText().toString();
-//                if (!verifyPassword(password)) {
-//                    mLoginButton.setEnabled(false);
-//                    mPasswordView.requestFocus();
+                // TODO: 2018/5/25 分离判断和更新视图
+//                String password = mPasswordView.getText().toString().trim();
+//                if (TextUtils.isEmpty(password)) {
+//                    mPasswordView.setError(getString(R.string.error_password_field_required));
 //                } else {
-//                    mLoginButton.setEnabled(true);
+//                    if (VerifyInformation.isPasswordValid(password)) {
+//                        mLoginButton.setEnabled(true);
+//                    } else {
+//                        mPasswordView.setError(getString(R.string.error_invalid_password));
+//                        mLoginButton.setEnabled(false);
+//                        mPasswordView.requestFocus();
+//                    }
 //                }
             }
         });
@@ -173,6 +183,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * 登录成功
+     *
      * @param message 服务器返回的成功信息
      */
     private void onLoginSuccess(String message) {
@@ -185,6 +196,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * 登录失败
+     *
      * @param message 服务器返回的失败信息
      */
     private void onLoginFailed(String message) {
@@ -194,6 +206,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * 解析服务器返回的字符串
+     *
      * @param result 服务器响应的字符串
      */
     private void resolveJson(String result) {
@@ -220,7 +233,8 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * 开启子线程，进行身份验证
-     * @param phone 手机号
+     *
+     * @param phone    手机号
      * @param password 密码
      */
     private void authentication(final String phone, final String password) {
@@ -232,7 +246,7 @@ public class LoginActivity extends AppCompatActivity {
                         .add("password", password)
                         .build();
                 Request request = new Request.Builder()
-                        .url("http://192.168.1.226:8080/controller/login.php")
+                        .url("http://192.168.1.192:8080/controller/login.php")
                         .post(body)
                         .build();
                 OkHttpClient client = new OkHttpClient();
@@ -251,55 +265,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * 显示进度
+     *
      * @param show 是否显示
      */
     private void showProgress(boolean show) {
         mLoginProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
         mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-    }
-
-    /**
-     * 验证手机号是否合法
-     * @param phonenum 手机号
-     * @return true 合法 false 不合法
-     */
-    private boolean verifyPhoneNum(String phonenum) {
-        if (TextUtils.isEmpty(phonenum)) {
-            mPhoneNumView.setError(getString(R.string.error_phonenum_field_required));
-            return false;
-        } else {
-            String regExp = "^((13[0-9])|(18[0-9])|(17[135-8])|(14[579])|(15[0-35-9]))\\d{8}$";
-            Pattern pattern = Pattern.compile(regExp);
-            Matcher matcher = pattern.matcher(phonenum);
-            if (!matcher.matches()) {
-                mPhoneNumView.setError(getString(R.string.error_invalid_phone_number));
-                return false;
-            }
-            return true;
-        }
-    }
-
-    /**
-     * 验证密码是否合法
-     * @param password 密码
-     * @return true 合法 false 不合法
-     */
-    private boolean verifyPassword(String password) {
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_password_field_required));
-            return false;
-        } else {
-            String regExp = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$";
-            Pattern pattern = Pattern.compile(regExp);
-            Matcher matcher = pattern.matcher(password);
-            if (!matcher.matches()) {
-                mPasswordView.setError(getString(R.string.error_invalid_password));
-                return false;
-            }
-            return true;
-        }
     }
 }
